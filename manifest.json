@@ -1,0 +1,14 @@
+{
+  "name": "Albâtre — Coupes géologiques de la Côte d'Albâtre",
+  "short_name": "Albâtre",
+  "description": "Catalogue de coupes géologiques dans les falaises de craie de la Côte d'Albâtre.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F4EE",
+  "theme_color": "#EDE8DC",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "titre": "Falaise d'Amont — La Manneporte",
+  "secteur": {
+    "point_ouest": "Plage d'Étretat",
+    "point_est": "Chemin des Douaniers, La Manneporte"
+  },
+  "vignette": "vignette.jpg",
+  "date": "2026-08-19",
+  "nb_points": 12,
+  "url_visite": "./coupes/exemple-etretat/"
+}

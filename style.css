@@ -1,0 +1,200 @@
+:root {
+  /* Palette — craie / silex / mer / rouille (oxyde de fer) */
+  --craie-1: #EFEBE0;
+  --craie-2: #DFD9C8;
+  --silex: #3A3833;
+  --rouille: #A05A34;
+  --mer: #47707A;
+  --ciel: #D8DED9;
+  --fond: #F6F4EE;
+  --texte: #2B2925;
+  --texte-clair: #6B675E;
+  --ligne: #D8D3C4;
+
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --mono: 'Space Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: var(--sans);
+  line-height: 1.55;
+}
+
+a { color: var(--mer); }
+a:hover { color: var(--rouille); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--rouille); outline-offset: 2px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-bottom: 3px solid var(--silex);
+}
+
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg .strata { width: 100%; height: 100%; display: block; }
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem 1.75rem 2.25rem;
+  max-width: 720px;
+  color: var(--craie-1);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  color: var(--craie-1);
+  opacity: 0.9;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5vw, 3.2rem);
+  margin: 0 0 0.7rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+.hero-lede {
+  font-size: 1.05rem;
+  max-width: 52ch;
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
+}
+
+/* ---------- Intro ---------- */
+.intro {
+  max-width: 720px;
+  margin: 2.25rem auto 0.5rem;
+  padding: 0 1.75rem;
+  color: var(--texte-clair);
+  font-size: 1.02rem;
+}
+
+/* ---------- Grille des coupes ---------- */
+.coupes {
+  max-width: 1100px;
+  margin: 1.75rem auto 3rem;
+  padding: 0 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.loading, .empty, .error {
+  grid-column: 1 / -1;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--texte-clair);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.coupe-card {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--ligne);
+  border-radius: 3px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--texte);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.coupe-card:hover, .coupe-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(58,56,51,0.14);
+}
+
+.coupe-thumb {
+  position: relative;
+  aspect-ratio: 16/10;
+  background: var(--craie-2);
+  overflow: hidden;
+}
+
+.coupe-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.coupe-thumb .no-thumb {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--texte-clair);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.coupe-body { padding: 0.95rem 1.05rem 1.1rem; }
+
+.coupe-secteur {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--rouille);
+  margin: 0 0 0.35rem;
+}
+
+.coupe-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.18rem;
+  margin: 0 0 0.5rem;
+}
+
+.coupe-meta {
+  display: flex;
+  gap: 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--texte-clair);
+  margin: 0;
+}
+
+/* ---------- Footer / À propos ---------- */
+.about {
+  border-top: 1px solid var(--ligne);
+  background: var(--craie-1);
+  padding: 2.25rem 1.75rem 2.75rem;
+}
+
+.about-inner { max-width: 720px; margin: 0 auto; }
+
+.about h2 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  margin: 0 0 0.8rem;
+}
+
+.about p {
+  font-size: 0.92rem;
+  color: var(--texte-clair);
+  margin: 0 0 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .hero-content { padding: 1.75rem 1.25rem 1.5rem; }
+  .coupes { padding: 0 1.25rem; gap: 1.1rem; }
+  .intro { padding: 0 1.25rem; }
+}

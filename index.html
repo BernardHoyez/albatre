@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albâtre — Coupes géologiques de la Côte d'Albâtre</title>
+<meta name="description" content="Succession de coupes géologiques dans les falaises de craie de la Côte d'Albâtre, entre Seine et Somme.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#EDE8DC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <svg class="strata" viewBox="0 0 1200 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- ciel -->
+      <rect x="0" y="0" width="1200" height="180" fill="var(--ciel)"/>
+      <!-- mer -->
+      <rect x="0" y="180" width="1200" height="60" fill="var(--mer)"/>
+      <!-- bancs de craie successifs, épaisseurs irrégulières comme une vraie coupe -->
+      <rect x="0" y="240" width="1200" height="26" fill="var(--craie-1)"/>
+      <rect x="0" y="266" width="1200" height="14" fill="var(--silex)"/>
+      <rect x="0" y="280" width="1200" height="34" fill="var(--craie-2)"/>
+      <rect x="0" y="314" width="1200" height="10" fill="var(--silex)"/>
+      <rect x="0" y="324" width="1200" height="40" fill="var(--craie-1)"/>
+      <rect x="0" y="364" width="1200" height="12" fill="var(--silex)"/>
+      <rect x="0" y="376" width="1200" height="44" fill="var(--craie-2)"/>
+      <!-- nodules de silex, disposés en ligne mais irréguliers -->
+      <g fill="var(--silex)">
+        <ellipse cx="80"  cy="298" rx="10" ry="6"/>
+        <ellipse cx="240" cy="300" rx="7"  ry="5"/>
+        <ellipse cx="410" cy="296" rx="12" ry="6"/>
+        <ellipse cx="600" cy="299" rx="8"  ry="5"/>
+        <ellipse cx="780" cy="297" rx="11" ry="6"/>
+        <ellipse cx="960" cy="300" rx="9"  ry="5"/>
+        <ellipse cx="1120" cy="298" rx="7" ry="5"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <p class="eyebrow">Stratigraphie côtière — Seine / Somme</p>
+    <h1>La Côte d'Albâtre</h1>
+    <p class="hero-lede">Une succession de coupes géologiques relevées dans les falaises de craie du Turonien, secteur par secteur, d'un accès à la mer au suivant.</p>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <p>Sur environ 130&nbsp;kilomètres, les falaises de la Côte d'Albâtre exposent en continu les bancs de craie et les niveaux de silex du Crétacé supérieur. Chaque fiche ci-dessous documente un secteur littoral, relevé sur le terrain avec des points géolocalisés.</p>
+  </section>
+
+  <section id="coupes" class="coupes">
+    <p class="loading" id="loading-msg">Chargement des coupes…</p>
+  </section>
+</main>
+
+<footer class="about">
+  <div class="about-inner">
+    <h2>À propos</h2>
+    <p>Ce catalogue référence des fiches de terrain produites avec l'application <a href="https://bernardhoyez.github.io/terrain" target="_blank" rel="noopener">terrain</a>, un outil de relevé de waypoints hors-ligne sur fond orthophoto IGN.</p>
+    <p>Pour un suivi de l'actualité géologique des falaises normandes (éboulements, érosion côtière, stratigraphie), voir le blog <a href="https://craies.crihan.fr" target="_blank" rel="noopener">craies.crihan.fr</a>.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
