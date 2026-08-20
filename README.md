@@ -54,6 +54,21 @@ Déposé à la racine de chaque fiche externe :
   simplement ignorée par le catalogue — sans faire échouer l'affichage des
   autres.
 
+## Lien de la fiche
+
+Le paquet exporté par terrain n'est que des données (`waypoints.json`,
+`manifest.json`, `photos/`…), sans page web propre. Le catalogue fait donc
+pointer chaque vignette vers l'app terrain elle-même, avec le circuit en
+paramètre :
+
+```
+https://bernardhoyez.github.io/terrain/?circuit=<url encodée de la fiche>
+```
+
+(Exception : la fiche de démonstration locale `coupes/exemple-etretat/`,
+qui a sa propre page statique et reste donc liée directement — voir
+`app.js`, `TERRAIN_APP_URL`.)
+
 ## Contrainte technique : CORS
 
 Le catalogue lit `coupe.json` par un `fetch()` cross-origin. GitHub Pages

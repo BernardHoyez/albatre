@@ -5,6 +5,11 @@
 // fichier coupe.json déposé à la racine du dépôt/URL de la fiche
 // (généré par l'app terrain lors de l'export du circuit).
 
+// URL de l'app terrain, qui seule sait charger/afficher un paquet de circuit
+// (le paquet lui-même n'est que des données : waypoints.json, manifest.json,
+// photos/, mbtiles/… — pas de page web à ouvrir directement).
+const TERRAIN_APP_URL = 'https://bernardhoyez.github.io/terrain/';
+
 const container = document.getElementById('coupes');
 const loadingMsg = document.getElementById('loading-msg');
 
@@ -63,7 +68,9 @@ async function chargerUneCoupe(entree) {
 function construireCarte(coupe) {
   const a = document.createElement('a');
   a.className = 'coupe-card';
-  a.href = coupe.url;
+  a.href = /^https?:\/\//i.test(coupe.url)
+    ? TERRAIN_APP_URL + '?circuit=' + encodeURIComponent(coupe.url)
+    : coupe.url;
   a.target = '_blank';
   a.rel = 'noopener';
 
