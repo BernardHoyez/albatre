@@ -16,17 +16,16 @@ et va chercher leurs métadonnées à distance pour construire les vignettes.
 
 ## Ajouter une nouvelle coupe
 
-1. Déployer le paquet exporté par terrain sur son propre dépôt/URL. Ce paquet
-   doit contenir, à sa racine, un fichier `coupe.json` (voir format ci-dessous)
-   et l'image de vignette qu'il référence.
-   *(Pour l'instant cette génération automatique n'existe pas encore côté
-   terrain — voir la section « À faire » plus bas. En attendant, `coupe.json`
-   peut être rédigé/copié à la main dans le paquet déployé.)*
-2. Dans `coupes.json`, ajouter une entrée `{ "url": "https://.../" }` pointant
+1. Générer le paquet du circuit dans l'app terrain (onglet 🛠️ Générer un
+   circuit) — `coupe.json` et la vignette sont produits automatiquement,
+   à la racine du paquet. Vérifier/ajuster les champs **Point ouest / Point
+   est** avant de générer (voir le README de terrain).
+2. Déployer ce paquet sur son propre dépôt/URL.
+3. Dans `coupes.json`, ajouter une entrée `{ "url": "https://.../" }` pointant
    vers cette fiche, **à la bonne place dans la liste** : les fiches sont
    affichées dans l'ordre du fichier, qui doit rester géographique
    (ouest → est, de la Seine vers la Somme).
-3. Committer et pousser. Le site va chercher `coupe.json` à chaque
+4. Committer et pousser. Le site va chercher `coupe.json` à chaque
    chargement, aucune autre action n'est nécessaire.
 
 ## Format de `coupe.json`
@@ -92,16 +91,11 @@ secours minimale.
    racine).
 4. Le site est servi sur `bernardhoyez.github.io/albatre`.
 
-## À faire (chantier séparé, côté app terrain)
+## Statut
 
-L'onglet « Générer un circuit » de terrain doit être complété pour générer
-automatiquement, dans le paquet exporté :
-- un fichier `coupe.json` (titre, secteur, vignette, date, nb de points),
-- la vignette elle-même,
-
-sur le modèle du `<dossier>.json` déjà produit par le paquet Déploiement de
-geotour. Cela évitera la rédaction manuelle de `coupe.json` pour chaque
-nouvelle fiche.
+`coupe.json` (et sa vignette) est généré automatiquement par l'app terrain
+depuis l'onglet 🛠️ Générer un circuit — plus besoin de rédaction manuelle.
+Confirmé en production avec la fiche Mesnil-Val/Criel.
 
 ## Service worker
 
