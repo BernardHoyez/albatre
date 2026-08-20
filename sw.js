@@ -1,10 +1,11 @@
-const CACHE_NAME = 'albatre-cache-v2';
+const CACHE_NAME = 'albatre-cache-v3';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
-  './manifest.json'
+  './manifest.json',
+  './images/hero-etretat.jpg'
 ];
 
 self.addEventListener('install', (event) => {
