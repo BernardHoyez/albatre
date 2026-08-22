@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,6 +33,10 @@
     <p>Sur environ 130&nbsp;kilomètres, les falaises de la Côte d'Albâtre exposent en continu les bancs de craie et les niveaux de silex du Crétacé supérieur. Chaque fiche ci-dessous documente un secteur littoral, relevé sur le terrain avec des points géolocalisés.</p>
   </section>
 
+  <section class="carte-section">
+    <div id="carte" aria-label="Carte de situation des coupes"></div>
+  </section>
+
   <section id="coupes" class="coupes">
     <p class="loading" id="loading-msg">Chargement des coupes…</p>
   </section>
@@ -45,6 +50,7 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

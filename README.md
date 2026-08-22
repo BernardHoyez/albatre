@@ -39,6 +39,8 @@ Déposé à la racine de chaque fiche externe :
     "point_ouest": "Plage d'Étretat",
     "point_est": "Chemin des Douaniers, La Manneporte"
   },
+  "lat": 49.7062,
+  "lon": 0.2044,
   "vignette": "vignette.jpg",
   "date": "2026-08-19",
   "nb_points": 12,
@@ -46,12 +48,27 @@ Déposé à la racine de chaque fiche externe :
 }
 ```
 
+- `lat`/`lon` sont les coordonnées du 1er waypoint du circuit, extraites
+  automatiquement par terrain lors de la génération du paquet — utilisées
+  pour placer un marqueur sur la carte de situation. Une fiche sans ces
+  champs (ancien paquet généré avant cette évolution) reste affichée dans
+  la grille mais n'apparaît simplement pas sur la carte.
 - `vignette` est un chemin **relatif à la racine de la fiche**.
 - `secteur` correspond aux deux points remarquables délimitant le tronçon
   (généralement deux accès à la mer).
 - Une fiche dont `coupe.json` est absent ou inaccessible (CORS, 404) est
   simplement ignorée par le catalogue — sans faire échouer l'affichage des
   autres.
+
+## Carte de situation
+
+Une carte (fond IGN Géoplateforme — estompage en niveaux de gris + trait de
+côte, sans toponymie, gratuit et sans clé) affiche un marqueur par coupe
+géolocalisée. Clic sur un marqueur → pop-up avec le titre et un lien vers la
+fiche (même mécanisme que les vignettes, voir « Lien de la fiche »
+ci-dessous). Le rendu du fond est volontairement laissé tel quel : plusieurs
+filtres CSS (contraste/luminosité/saturation) ont été testés et aucun n'a
+amélioré la lisibilité par rapport à la tuile IGN d'origine.
 
 ## Lien de la fiche
 

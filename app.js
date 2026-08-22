@@ -41,6 +41,7 @@ async function chargerCoupes() {
   }
 
   coupesValides.forEach((coupe) => container.appendChild(construireCarte(coupe)));
+  construireCarteSituation(coupesValides);
 }
 
 async function chargerUneCoupe(entree) {
@@ -57,7 +58,9 @@ async function chargerUneCoupe(entree) {
       secteur: data.secteur || null,
       vignette: data.vignette ? base + data.vignette : null,
       date: data.date || null,
-      nb_points: data.nb_points ?? null
+      nb_points: data.nb_points ?? null,
+      lat: typeof data.lat === 'number' ? data.lat : null,
+      lon: typeof data.lon === 'number' ? data.lon : null
     };
   } catch (err) {
     console.warn('Fiche ignorée :', entree.url, err);
@@ -115,6 +118,67 @@ function construireCarte(coupe) {
   a.appendChild(thumb);
   a.appendChild(body);
   return a;
+}
+
+function construireCarteSituation(coupes) {
+  const mapEl = document.getElementById('carte');
+  if (!mapEl || typeof L === 'undefined') return;
+
+  const coupesGeolocalisees = coupes.filter((c) => c.lat !== null && c.lon !== null);
+  if (coupesGeolocalisees.length === 0) {
+    mapEl.remove();
+    return;
+  }
+
+  const map = L.map('carte', { scrollWheelZoom: false }).setView([49.85, 0.7], 10);
+
+  // Fond IGN Géoplateforme, sans clé : estompage (relief niveaux de gris,
+  // sans toponymie) + trait de côte. Rendu d'origine, non retouché — testé
+  // avec plusieurs filtres CSS (contraste/luminosité/saturation) et aucun
+  // n'a fait mieux que la tuile IGN telle quelle.
+  L.tileLayer(
+    'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0' +
+    '&LAYER=IGNF_ELEVATION.ELEVATIONGRIDCOVERAGE.SHADOW&STYLE=normal' +
+    '&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
+    { attribution: 'Fond : IGN — Géoplateforme (estompage)', maxZoom: 17, minZoom: 6 }
+  ).addTo(map);
+
+  L.tileLayer(
+    'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0' +
+    '&LAYER=ELEVATION.LEVEL0&STYLE=normal' +
+    '&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
+    { attribution: 'Trait de côte IGN', maxZoom: 18, minZoom: 6, opacity: 0.9 }
+  ).addTo(map);
+
+  const points = [];
+  coupesGeolocalisees.forEach((coupe) => {
+    const marqueur = L.circleMarker([coupe.lat, coupe.lon], {
+      radius: 8, color: '#fff', weight: 2, fillColor: '#A05A34', fillOpacity: 1
+    }).addTo(map);
+
+    const lien = /^https?:\/\//i.test(coupe.url)
+      ? TERRAIN_APP_URL + '?circuit=' + encodeURIComponent(coupe.url)
+      : coupe.url;
+
+    const metaParts = [];
+    if (coupe.date) metaParts.push(formaterDate(coupe.date));
+    if (coupe.nb_points !== null) metaParts.push(`${coupe.nb_points} points`);
+
+    marqueur.bindPopup(
+      `<div class="carte-tip"><strong>${coupe.titre}</strong><br>` +
+      `${metaParts.join(' · ')}<br>` +
+      `<a href="${lien}" target="_blank" rel="noopener">Ouvrir la fiche →</a></div>`,
+      { closeButton: true, autoClose: true, closeOnClick: true }
+    );
+
+    points.push([coupe.lat, coupe.lon]);
+  });
+
+  if (points.length > 1) {
+    map.fitBounds(L.latLngBounds(points), { padding: [30, 30] });
+  } else if (points.length === 1) {
+    map.setView(points[0], 12);
+  }
 }
 
 function formaterDate(iso) {
